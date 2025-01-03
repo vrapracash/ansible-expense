@@ -16,7 +16,7 @@
         state: started
         enabled: yes
     
-    - name: connect mysql mysql-server
+    - name: connect mysql server
       communication.mysql.mysql_info:
         login_user: root 
         login_password: "{{ mysql_root_password }}"
