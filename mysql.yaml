@@ -1,6 +1,9 @@
 - name: mysql configuration
   hosts: mysql
   become: yes
+  vars:
+    mysql_root_passowrd: ExpenseApp@1
+    login_hosts: mysql.veeraprakash.online
   tasks:
     - name: Install mysql-server
       ansible.builtin.package:
@@ -12,3 +15,19 @@
         name: mysqld
         state: started
         enabled: yes
+    
+    - name: connect mysql mysql-server
+      communication.mysql.mysql_info:
+        login_user: root 
+        login_password: "{{ mysql_root_password }}"
+        login_hosts: "{{ login_hosts }}"
+      ignore_errors: true
+      register: mysql_info
+
+    - name: print mysql info 
+      ansible.builtin.debug:
+        msg: "{{ mysql_info }}"
+
+    - name: setup MySQL root password 
+      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
+      when: mysql_info.failed is true
