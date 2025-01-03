@@ -48,7 +48,7 @@
         executable: pip3.9
 
     - name: import mysql data
-      communication.mysql.mysql_db:
+      community.mysql.mysql_db:
         login_user: root
         login_password: "{{ mysql_root_password }}"
         login_hosts: "{{ login_hosts }}"
