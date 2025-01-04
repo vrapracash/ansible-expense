@@ -41,6 +41,11 @@
         chdir: /app
     
     - name: copy backend servcice file 
+      ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+
+    - name: Install PyMySQL and cryptography
       ansible.builtin.pip:
         name:
         - PyMySQL
