@@ -3,7 +3,7 @@
   become: yes
   vars:
     mysql_root_password: ExpenseApp@1
-    login_hosts: mysql.veeraprakash.online
+    login_host: mysql.veeraprakash.online
   tasks:
     - name: disable default nodejs
       ansible.builtin.command: dnf module disable nodejs -y
@@ -51,7 +51,7 @@
       community.mysql.mysql_db:
         login_user: root
         login_password: "{{ mysql_root_password }}"
-        login_hosts: "{{ login_hosts }}"
+        login_host: "{{ login_host }}"
         target: /app/schema/backend.sql
         name: all 
         state: import
